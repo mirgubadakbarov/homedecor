@@ -314,7 +314,6 @@
       "products": [
         1
       ],
-     
       "img": "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlOF9waG90b2dyYXBoeV9vZl9zY2FuZGluYXZpYW5fc3R5bGVfY296eV9tb2Rlcm5fYl9kYmM1NDA2Yy0zZTA0LTQzNzMtYWVhYi1iNjhkOTVkZjc5MTJfMS5qcGc.jpg"
     },
     {
@@ -383,7 +382,7 @@
       "titleAz": "vanna otağı",
       "titleRu": "ванная комната",
       "products": [],
-      "img": "https://static.wixstatic.com/media/5a4d0f_7983901a08e44724ac1d85f2c9ae975c~mv2.png/v1/fill/w_870,h_500,al_c,q_90/5a4d0f_7983901a08e44724ac1d85f2c9ae975c~mv2.png"
+      "img": ""
     }
   ],
   "homeIntro": {
@@ -617,6 +616,13 @@
       "count": 9,
       "userId": 14,
       "id": 9
+    },
+    {
+      "id": "cbf2",
+      "productId": 1,
+      "colorId": 2,
+      "count": 4,
+      "userId": 9
     }
   ]
 }
