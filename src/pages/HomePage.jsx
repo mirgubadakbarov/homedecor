@@ -18,19 +18,70 @@ import HomeMainSlider from "../components/HomeMainSlider"
 import HomeProducts from "../components/HomeProducts"
 import PopularProducts from "../components/PopularProducts"
 import ProductElement from "../components/ProductElement"
-import React from "react"
+import React, {useState} from "react"
 import {useLang} from "../context/LangContext"
 import i18n from "../utils/i18n"
 import {useEffect} from "react"
-
 const HomePage = () => {
   const {lang} = useLang()
   const {data: categories} = useGetAllCategoriesQuery()
   const {data: collections} = useGetAllCollectionsQuery()
   const {data: discount} = useGetDiscountDataQuery()
   const {data: homeIntro, isLoading} = useGetHomeIntroQuery()
-  const {data: popularProducts} = useGetPopularProductsQuery()
-  const {data: products} = useGetAllProductsHomeQuery()
+
+  const [popularProducts, setPopularProducts] = useState()
+
+  const fetchHomeProducts = async () => {
+    const url = "http://localhost:3000/products"
+
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      const data = await response.json()
+      const filteredData = data.filter((product) => product.showInHome === true)
+      setProducts(filteredData)
+
+      return filteredData
+    } catch (error) {
+      console.error("Failed to fetch popular products:", error)
+      throw error
+    }
+  }
+
+  const fetchPopularProducts = async () => {
+    const url = "http://localhost:3000/products"
+
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      const data = await response.json()
+      const filteredData = data.filter((product) => product.isPopular === true)
+      setPopularProducts(filteredData)
+
+      return filteredData
+    } catch (error) {
+      console.error("Failed to fetch popular products:", error)
+      throw error
+    }
+  }
+
+  const [products, setProducts] = useState()
   const {t} = useTranslation()
 
   switch (lang) {
@@ -44,6 +95,15 @@ const HomePage = () => {
       useSetPageTitle("Home page")
   }
 
+  useEffect(() => {
+    fetchPopularProducts()
+  }, [])
+
+  useEffect(() => {
+    fetchHomeProducts()
+  }, [])
+
+  console.log(popularProducts)
   return (
     <main>
       {homeIntro && <HomeIntro lang={lang} {...homeIntro} />}
